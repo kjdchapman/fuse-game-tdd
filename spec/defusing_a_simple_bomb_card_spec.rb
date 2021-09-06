@@ -1,13 +1,16 @@
-describe 'placing a dice on a bomb card' do
+describe 'placing a die on a bomb card' do
   context 'matching the conditions' do
-    it 'works' do
-      card = [{number: 2}]
+    let(:card) { {number: 2} }
+    let(:die) { {number: 2, colour: :red} }
 
-      dice = [{number: 2, colour: :red}]
+    it 'places the die on the card' do
+      new_card = put_die_on_card(die, card, position: 1)
+      expect(new_card[:dice].first).to eq(die)
+    end
 
-      result = put_dice_on_card(dice, card, position: 1)
-
-      expect(result).to eq true
+    xit 'defuses the card' do
+      new_card = put_die_on_card(die, card, position: 1)
+      expect(new_card[:defused]).to eq(true)
     end
   end
 
@@ -17,20 +20,8 @@ describe 'placing a dice on a bomb card' do
   end
 end
 
-class GameState
-  def put_dice_on_card(dice, card, position:)
-    if valid_placement?(dice, card, position: position)
-      change_game_state_to_actually_put_dice_on_card
-    end
+def put_die_on_card(die, card, position:)
+  card[:dice] = [die]
 
-    return valid
-  end
-
-  def valid_placement?; end
-
-  def change_game_state_to_actually_put_dice_on_card; end
-end
-
-class GameRules
-  def valid_placement?; end
+  return card
 end
