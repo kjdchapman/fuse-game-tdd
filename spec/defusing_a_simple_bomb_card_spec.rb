@@ -1,12 +1,36 @@
-describe 'defusing a simple bomb card' do
-  it 'looks right' do
-    deck = Deck.new
+describe 'placing a dice on a bomb card' do
+  context 'matching the conditions' do
+    it 'works' do
+      card = [{number: 2}]
 
-    first_card = deck.deal
+      dice = [{number: 2, colour: :red}]
 
-    expect(first_card.boxes.first).to eq({ number: 2, colour: nil })
+      result = put_dice_on_card(dice, card, position: 1)
+
+      expect(result).to eq true
+    end
   end
 
-  it 'can have a dice placed on it' do
+  xcontext 'not matching the conditions' do
+    it 'complains' do
+    end
   end
+end
+
+class GameState
+  def put_dice_on_card(dice, card, position:)
+    if valid_placement?(dice, card, position: position)
+      change_game_state_to_actually_put_dice_on_card
+    end
+
+    return valid
+  end
+
+  def valid_placement?; end
+
+  def change_game_state_to_actually_put_dice_on_card; end
+end
+
+class GameRules
+  def valid_placement?; end
 end
