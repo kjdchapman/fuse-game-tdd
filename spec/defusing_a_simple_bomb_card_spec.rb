@@ -1,3 +1,5 @@
+require_relative("../put_die_on_card")
+
 describe 'placing a die on a bomb card' do
   context 'matching the conditions' do
     let(:card) { {number: 2} }
@@ -28,13 +30,4 @@ describe 'placing a die on a bomb card' do
       expect(new_card[:defused]).to be false
     end
   end
-end
-
-def put_die_on_card(die, card, position:)
-  dice_matches = die[:number] == card[:number]
-
-  card[:dice] = dice_matches ? [die] : []
-  card[:defused] = dice_matches
-
-  return card
 end
