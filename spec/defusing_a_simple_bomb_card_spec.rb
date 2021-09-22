@@ -30,6 +30,22 @@ describe 'placing a die on a bomb card' do
       expect(new_card[:defused]).to be false
     end
   end
+
+  context 'with multiple spaces' do
+    let(:card) { [{number: 1}, {number: 2}] }
+
+    context 'a die matching the first space' do
+      let(:die) { {number: 1}}
+
+      it 'can be placed on the first space' do
+        new_card = put_die_on_card(die, card, position: 1)
+        expect(new_card[:dice].first).to eq(die)
+      end
+
+      xit 'can not be placed on the second space' do
+      end
+    end
+  end
 end
 
 describe 'winning the game' do
