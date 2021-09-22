@@ -48,7 +48,7 @@ describe 'placing a die on a bomb card' do
   end
 end
 
-describe 'winning the game' do
+describe 'seeing some cards and dice' do
   context 'if all but 2 cards are defused we win!' do
   end
 end
