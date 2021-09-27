@@ -32,7 +32,7 @@ describe 'placing a die on a bomb card' do
   end
 
   context 'with multiple spaces' do
-    let(:card) { [{number: 1}, {number: 2}] }
+    let(:card) { { conditions: [{number: 1}, {number: 2}]} }
 
     context 'a die matching the first space' do
       let(:die) { {number: 1}}

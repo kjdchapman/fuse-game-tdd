@@ -1,8 +1,14 @@
 def put_die_on_card(die, card, position:)
-  dice_matches = die[:number] == card[:number]
+  unless card[:conditions].nil?
+    card = card[:conditions][0]
+  end
 
-  card[:dice] = dice_matches ? [die] : []
-  card[:defused] = dice_matches
+  if card[:conditions].nil?
+    dice_matches = die[:number] == card[:number]
 
-  return card
+    card[:dice] = dice_matches ? [die] : []
+    card[:defused] = dice_matches
+
+    return card
+  end
 end
