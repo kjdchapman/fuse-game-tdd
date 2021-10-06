@@ -47,7 +47,9 @@ describe 'placing a die on a bomb card' do
         expect(new_card[:dice].first).to eq(die)
       end
 
-      xit 'can not be placed on the second space' do
+      it 'can not be placed on the second space' do
+        new_card = put_die_on_card(die, card, position: 2)
+        expect(new_card[:dice]).to be_empty
       end
     end
   end
