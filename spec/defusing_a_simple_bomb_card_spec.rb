@@ -2,8 +2,8 @@ require_relative("../put_die_on_card")
 
 describe 'placing a die on a bomb card' do
   context 'matching the conditions' do
-    let(:card) { {number: 2} }
-    let(:die) { {number: 2, colour: :red} }
+    let(:card) {{ conditions: [{number: 2}] }}
+    let(:die) {{number: 2, colour: :red}}
 
     it 'places the die on the card' do
       new_card = put_die_on_card(die, card, position: 1)
@@ -14,11 +14,16 @@ describe 'placing a die on a bomb card' do
       new_card = put_die_on_card(die, card, position: 1)
       expect(new_card[:defused]).to be true
     end
+
+    it 'does not change the conditions of the card' do
+      new_card = put_die_on_card(die, card, position: 1)
+      expect(new_card[:conditions]).to eq [{number: 2}]
+    end
   end
 
   context 'not matching the conditions' do
-    let(:card) { {number: 3} }
-    let(:die) { {number: 2, colour: :red} }
+    let(:card) {{ conditions: [{number: 3}] }}
+    let(:die) {{number: 2, colour: :red}}
 
     it 'does not place the die on the card' do
       new_card = put_die_on_card(die, card, position: 1)
